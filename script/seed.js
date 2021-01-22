@@ -1,18 +1,46 @@
 'use strict'
 
 const db = require('../server/db')
-const {User} = require('../server/db/models')
+const {User, Restaurants, Lists} = require('../server/db/models')
 
 async function seed() {
   await db.sync({force: true})
   console.log('db synced!')
 
   const users = await Promise.all([
-    User.create({email: 'cody@email.com', password: '123'}),
+    User.create({email: 'kathy@email.com', password: '123', name: 'Kathy'}),
     User.create({email: 'murphy@email.com', password: '123'})
   ])
 
+  const restaurants = await Promise.all([
+    Restaurants.create({
+      category: 'Sushi',
+      address: '123 N Milwakee',
+      name: 'Ruk Sushi',
+      notes: 'Try their pad thai!',
+      rating: 5
+    }),
+    Restaurants.create({
+      category: 'Mexician',
+      address: '123 N Belmont',
+      name: 'Taco Burritto King',
+      notes: 'Try their veggie nachos!'
+    })
+  ])
+
+  const lists = await Promise.all([
+    Lists.create({
+      name: 'Kathys List'
+    })
+  ])
+
+  await lists[0].setUser(users[0])
+  await lists[0].addRestaurants(restaurants[0])
+  await lists[0].addRestaurants(restaurants[1])
+
   console.log(`seeded ${users.length} users`)
+  console.log(`seeded ${restaurants.length} resturants`)
+  console.log(`seeded ${lists.length} lists`)
   console.log(`seeded successfully`)
 }
 
