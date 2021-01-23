@@ -1,5 +1,7 @@
 import React, {Component} from 'react'
 import {connect} from 'react-redux'
+import MapContainer from './map'
+import SearchBar from './search-bar'
 
 /**
  * COMPONENT
@@ -10,7 +12,12 @@ class Main extends Component {
   }
 
   render() {
-    return <div>Home page!</div>
+    return (
+      <div>
+        {/* <MapContainer /> */}
+        <SearchBar />
+      </div>
+    )
   }
 }
 
