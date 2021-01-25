@@ -15,14 +15,16 @@ async function seed() {
   const restaurants = await Promise.all([
     Restaurants.create({
       category: 'Sushi',
-      address: '123 N Milwakee',
+      lat: 41.961423518551975,
+      lng: -87.75495448832201,
       name: 'Ruk Sushi',
       notes: 'Try their pad thai!',
       rating: 5
     }),
     Restaurants.create({
       category: 'Mexician',
-      address: '123 N Belmont',
+      lat: 41.88660354452666,
+      lng: -87.64878808572972,
       name: 'Taco Burritto King',
       notes: 'Try their veggie nachos!'
     })

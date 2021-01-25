@@ -4,18 +4,18 @@ const db = require('../db')
 const Restaurants = db.define('restaurants', {
   category: {
     type: Sequelize.STRING,
-    allowNull: false,
     validate: {
       len: [1, 25]
     }
   },
-  address: {
-    type: Sequelize.STRING,
-    allowNull: false
+  lat: {
+    type: Sequelize.DECIMAL
+  },
+  lng: {
+    type: Sequelize.DECIMAL
   },
   name: {
-    type: Sequelize.STRING,
-    allowNull: false
+    type: Sequelize.STRING
   },
   active: {
     type: Sequelize.BOOLEAN,
