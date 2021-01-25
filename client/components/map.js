@@ -194,39 +194,28 @@ import List from './list'
 export class MapContainer extends Component {
   constructor() {
     super()
+    this.currentMarker = {
+      selectedPlace: {},
+      activeMarker: {},
+      showingInfoWindow: false
+    }
     this.setCurrentMarker = this.setCurrentMarker.bind(this)
-    this.currentMarker = {selectedPlace: {}, showingInfoWindow: false}
-    this.displayMarkers = this.displayMarkers.bind(this)
+
+    // this.displayMarkers = this.displayMarkers.bind(this)
   }
 
   componentDidMount() {
     this.props.fetchRestaurants()
   }
 
-  setCurrentMarker = restaurant => {
+  setCurrentMarker = (props, marker, e) => {
     this.currentMarker = {
-      selectedPlace: restaurant,
+      selectedPlace: props,
+      activeMarker: marker,
       showingInfoWindow: true
     }
 
-    console.log('MARKER STATE', restaurant)
-  }
-
-  displayMarkers = () => {
-    return this.props.restaurants.map((restaurant, index) => {
-      return (
-        <Marker
-          key={index}
-          id={index}
-          name={restaurant.name}
-          position={{lat: restaurant.lat, lng: restaurant.lng}}
-          onClick={
-            () => this.setCurrentMarker(restaurant)
-            // () => this.setCurrentMarker({ name: restaurant.name, showingInfoWindow: true, location: { lat: restaurant.lat, lng: restaurant.lng } })
-          }
-        />
-      )
-    })
+    console.log('MARKER STATE', this.currentMarker)
   }
 
   render() {
@@ -244,19 +233,33 @@ export class MapContainer extends Component {
             lng: -87.6298
           }}
         >
-          {this.displayMarkers()}
-
+          {restaurants.map((restaurant, index) => (
+            <Marker
+              key={index}
+              id={index}
+              name={restaurant.name}
+              position={{lat: restaurant.lat, lng: restaurant.lng}}
+              onClick={
+                this.setCurrentMarker
+                // () => this.setCurrentMarker({ name: restaurant.name, showingInfoWindow: true, location: { lat: restaurant.lat, lng: restaurant.lng } })
+              }
+            />
+          ))}
+          {/* {this.currentMarker && ( */}
           <InfoWindow
-            onCloseClick={() => (this.currentMarker = {})}
+            // marker={this.currentMarker.activeMarker}
             position={{
-              lat: this.currentMarker.lat,
-              lng: this.currentMarker.lng
+              lat: this.currentMarker.selectedPlace.position.lat,
+              lng: this.currentMarker.selectedPlace.position.lng
             }}
+            visible={this.currentMarker.showingInfoWindow}
+            // onCloseClick={() => (this.currentMarker = {})}
           >
             <div>
               <h1>hello!</h1>
             </div>
           </InfoWindow>
+          {/* )} */}
         </Map>
         <List />
       </div>
