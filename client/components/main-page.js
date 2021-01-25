@@ -14,8 +14,8 @@ class Main extends Component {
   render() {
     return (
       <div>
-        {/* <MapContainer /> */}
-        <SearchBar />
+        <MapContainer />
+        {/* <SearchBar /> */}
       </div>
     )
   }
