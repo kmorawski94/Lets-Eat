@@ -186,52 +186,70 @@
 import React, {Component} from 'react'
 import {compose} from 'redux'
 import {connect} from 'react-redux'
-import {Map, InfoWindow, Marker, GoogleApiWrapper} from 'google-maps-react'
+import {
+  Map,
+  InfoWindow,
+  Marker,
+  GoogleApiWrapper,
+  mapTypeControl
+} from 'google-maps-react'
 import SearchBar from './search-bar'
 import {fetchRestaurants} from '../store/restaurants'
+import {Container, InputGroup} from 'react-bootstrap'
 import List from './list'
 
 export class MapContainer extends Component {
   constructor() {
     super()
-    this.currentMarker = {
+    this.state = {
       selectedPlace: {},
       activeMarker: {},
       showingInfoWindow: false
     }
     this.setCurrentMarker = this.setCurrentMarker.bind(this)
-
-    // this.displayMarkers = this.displayMarkers.bind(this)
   }
 
-  componentDidMount() {
-    this.props.fetchRestaurants()
-  }
+  // componentDidMount() {
+  //   this.props.fetchRestaurants()
+  //   this.getUserLocation()
+  // }
+
+  // getUserLocation = () => {
+  //   if (navigator.geolocation) {
+  //     navigator.geolocation.getCurrentPosition(this.showUserPosition)
+  //   }
+  // }
+
+  // showUserPosition = position => {
+  //   console.log("IT WORKED", position)
+  //   this.setState = {
+  //     lat: position.coords.latitude,
+  //     lng: position.coords.longitude
+  //   }
+  // }
 
   setCurrentMarker = (props, marker, e) => {
-    this.currentMarker = {
+    this.setState({
       selectedPlace: props,
       activeMarker: marker,
       showingInfoWindow: true
-    }
-
-    console.log('MARKER STATE', this.currentMarker)
+    })
   }
 
   render() {
     const restaurants = this.props.restaurants
-    console.log('STATE', this.props.restaurants)
     return (
       <div>
-        <SearchBar />
+        <Container>
+          <SearchBar />
+        </Container>
         <Map
           google={this.props.google}
-          zoom={8}
+          zoom={10}
           style={mapStyles}
-          initialCenter={{
-            lat: 41.8781,
-            lng: -87.6298
-          }}
+          mapTypeControl={false}
+          streetViewControl={false}
+          initialCenter={{lat: 41.8781, lng: -87.6298}}
         >
           {restaurants.map((restaurant, index) => (
             <Marker
@@ -247,12 +265,12 @@ export class MapContainer extends Component {
           ))}
           {/* {this.currentMarker && ( */}
           <InfoWindow
-            // marker={this.currentMarker.activeMarker}
-            position={{
-              lat: this.currentMarker.selectedPlace.position.lat,
-              lng: this.currentMarker.selectedPlace.position.lng
-            }}
-            visible={this.currentMarker.showingInfoWindow}
+            marker={this.state.activeMarker}
+            // position={{
+            //   lat: this.state.selectedPlace.position.lat,
+            //   lng: this.state.selectedPlace.position.lng
+            // }}
+            visible={this.state.showingInfoWindow}
             // onCloseClick={() => (this.currentMarker = {})}
           >
             <div>
@@ -261,7 +279,11 @@ export class MapContainer extends Component {
           </InfoWindow>
           {/* )} */}
         </Map>
-        <List />
+        {/* </Card.Body>
+          </Card> */}
+        {/* <Card>
+            <List />
+          </Card> */}
       </div>
     )
   }
@@ -269,7 +291,7 @@ export class MapContainer extends Component {
 
 const mapStyles = {
   // position: 'relative',
-  width: '90%',
+  width: '100%',
   height: '50%'
 }
 

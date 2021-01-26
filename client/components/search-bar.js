@@ -7,6 +7,7 @@ import PlacesAutocomplete, {
 import {useDispatch, useSelector} from 'react-redux'
 import MapContainer from './map'
 import {getNewRestaurant} from '../store/restaurants'
+import {InputGroup, Card} from 'react-bootstrap'
 
 export default function SearchBar(props) {
   const [address, setAddress] = React.useState('')
@@ -32,6 +33,7 @@ export default function SearchBar(props) {
       name: restaurantName
     }
     dispatch(getNewRestaurant(restaurant))
+    // clearSuggestions()
   }
 
   return (
@@ -43,11 +45,14 @@ export default function SearchBar(props) {
       >
         {({getInputProps, suggestions, getSuggestionItemProps, loading}) => (
           <div>
-            <p>Latitude: {coordinates.lat}</p>
-            <p>Longitude: {coordinates.lng}</p>
-            <input
-              {...getInputProps({placeholder: 'Type in restaurant name'})}
-            />
+            <InputGroup className="mb-3">
+              <input {...getInputProps({placeholder: 'Restaurant name'})} />
+              <InputGroup.Append>
+                <InputGroup.Text id="inputGroup-sizing-default">
+                  Search
+                </InputGroup.Text>
+              </InputGroup.Append>
+            </InputGroup>
             <div>
               {loading ? <div>...loading</div> : null}
               {suggestions.map((suggestion, index) => {
