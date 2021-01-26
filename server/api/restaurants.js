@@ -19,3 +19,17 @@ router.post('/new', async (req, res, next) => {
     next(err)
   }
 })
+
+router.delete('/delete/:id', async (req, res, next) => {
+  try {
+    const restaurantId = req.params.id
+    await Restaurants.destroy({
+      where: {
+        id: restaurantId
+      }
+    })
+    res.send(204).end()
+  } catch (err) {
+    next(err)
+  }
+})
