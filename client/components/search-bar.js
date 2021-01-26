@@ -1,13 +1,11 @@
-import React, {Component} from 'react'
+import React from 'react'
 import PlacesAutocomplete, {
   geocodeByAddress,
-  geocodeByPlaceId,
   getLatLng
 } from 'react-places-autocomplete'
-import {useDispatch, useSelector} from 'react-redux'
-import MapContainer from './map'
+import {useDispatch} from 'react-redux'
 import {getNewRestaurant} from '../store/restaurants'
-import {InputGroup, Card} from 'react-bootstrap'
+import {InputGroup} from 'react-bootstrap'
 
 export default function SearchBar(props) {
   const [address, setAddress] = React.useState('')
@@ -33,6 +31,7 @@ export default function SearchBar(props) {
       name: restaurantName
     }
     dispatch(getNewRestaurant(restaurant))
+    setAddress('')
     // clearSuggestions()
   }
 
@@ -59,7 +58,6 @@ export default function SearchBar(props) {
                 const style = {
                   backgroundColor: suggestion.active ? '#41b6e6' : '#fff'
                 }
-                // console.log("SUGGESTIONS", suggestion)
                 return (
                   <div
                     key={index}

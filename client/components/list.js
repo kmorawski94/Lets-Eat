@@ -8,9 +8,11 @@ export class List extends Component {
     super()
     this.deleteRestaurant = this.deleteRestaurant.bind(this)
   }
+
   componentDidMount() {
     this.props.fetchRestaurants()
   }
+
   deleteRestaurant(id) {
     this.props.deleteRestaurant(id)
     this.props.fetchRestaurants()
@@ -28,7 +30,7 @@ export class List extends Component {
                 <ListGroup.Item key={restaurant.id} variant="secondary">
                   <p> Name: {restaurant.name}</p>
                   <p> Category: {restaurant.category}</p>
-                  <p>Rating: {restaurant.rating}</p>
+                  <p> Rating: {restaurant.rating}</p>
                   <p> Notes: {restaurant.notes}</p>
                   <Button
                     className="delete-button"
