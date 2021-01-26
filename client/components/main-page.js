@@ -1,7 +1,8 @@
 import React, {Component} from 'react'
 import {connect} from 'react-redux'
 import MapContainer from './map'
-import SearchBar from './search-bar'
+import List from './list'
+import {Container, Card} from 'react-bootstrap'
 
 /**
  * COMPONENT
@@ -14,20 +15,15 @@ class Main extends Component {
   render() {
     return (
       <div>
+        {/* <Card> */}
         <MapContainer />
-        {/* <SearchBar /> */}
+        {/* </Card> */}
+        {/* <Card> */}
+        <List />
+        {/* </Card> */}
       </div>
     )
   }
 }
 
-/**
- * CONTAINER
- */
-const mapState = state => ({})
-
-const mapDispatch = dispatch => {
-  return {}
-}
-
-export default connect(mapState, mapDispatch)(Main)
+export default Main

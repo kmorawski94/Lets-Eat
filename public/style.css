@@ -20,46 +20,7 @@ form div {
   display: inline-block;
 }
 
-/* h2 {
-  position: absolute;
-  top: 10rem;
-  left: 1rem;
-  color: #281414;
-  z-index: 10;
-  margin: 0;
-  padding: 0;
-} */
-
-/* .search {
-  position: absolute;
-  top: 10rem;
-  left: 50%;
-  transform: translateX(-50%);
-  width: 100%;
-  max-width: 400px;
-  z-index: 10;
-}
-
-.search input {
-  padding: 0.5rem;
-  font-size: 0.75rem;
-  width: 100%;
-}
-
-.locate {
-  position: absolute;
-  top: 10rem;
-  left: 1rem;
-  background: none;
-  border: none;
-  z-index: 10;
-}
-.locate img {
-  width: 30px;
-  cursor: pointer;
-} */
-
-.main-wrapper {
+/* .main-wrapper {
   height: 60vh;
   margin: 10px 50px;
   filter: drop-shadow(-1px 5px 3px #ccc);
@@ -77,4 +38,8 @@ form div {
 .search-input {
   font-size: 1.2em;
   width: 80%;
+} */
+
+.List {
+  margin-top: 380px;
 }
