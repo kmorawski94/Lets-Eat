@@ -5,6 +5,7 @@ import axios from 'axios'
  */
 const GET_RESTAURANTS = 'GET_RESTAURANTS'
 const NEW_RESTAURANT = 'NEW_RESTAURANT'
+const DELETE_RESTAURANT = 'DELETE_RESTAURANT'
 
 /**
  * ACTION CREATORS
@@ -17,6 +18,11 @@ const getRestaurants = restaurants => ({
 const newRestaurant = restaurant => ({
   type: NEW_RESTAURANT,
   restaurant
+})
+
+const deleteRestaurant = restaurantId => ({
+  type: DELETE_RESTAURANT,
+  restaurantId
 })
 
 // THUNK CREATORS
@@ -34,6 +40,13 @@ export const getNewRestaurant = restaurant => {
   }
 }
 
+export const deleteCurrentRestaurant = restaurantId => {
+  return async dispatch => {
+    await axios.delete(`/api/restaurants/delete/${restaurantId}`)
+    dispatch(deleteRestaurant(restaurantId))
+  }
+}
+
 //INITIAL STATE
 const initialState = []
 
@@ -45,6 +58,12 @@ const restaurants = (state = initialState, action) => {
       return action.restaurants
     case NEW_RESTAURANT:
       return [...state, action.restaurant]
+    case DELETE_RESTAURANT:
+      state.map(restaurant => {
+        if (restaurant.id !== action.restaurantId) {
+          return restaurant
+        }
+      })
     default:
       return state
   }
