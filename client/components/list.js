@@ -15,7 +15,7 @@ export class List extends Component {
 
   deleteRestaurant(id) {
     this.props.deleteRestaurant(id)
-    this.props.fetchRestaurants()
+    // this.props.fetchRestaurants()
   }
 
   render() {

@@ -44,6 +44,8 @@ export const deleteCurrentRestaurant = restaurantId => {
   return async dispatch => {
     await axios.delete(`/api/restaurants/delete/${restaurantId}`)
     dispatch(deleteRestaurant(restaurantId))
+    const restaurants = await axios.get('/api/restaurants')
+    dispatch(getRestaurants(restaurants.data))
   }
 }
 
@@ -54,7 +56,6 @@ const initialState = []
 const restaurants = (state = initialState, action) => {
   switch (action.type) {
     case GET_RESTAURANTS:
-      console.log('STATE IN REDUCER', state)
       return action.restaurants
     case NEW_RESTAURANT:
       return [...state, action.restaurant]
