@@ -4,7 +4,6 @@ Lets Eat! helps you easily keep track of resturants you want to try out. Users c
 
 Built during a 5 day solo hackathon
 
-https://media.giphy.com/media/rNFj3FiWrdt7mdkGB0/giphy.gif
 
 Stack: Node, Express, Postgres, React, Redux, React Bootstrap, @react-google-maps/api, and react-places-autocomplete libraries.
 
